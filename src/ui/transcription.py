@@ -194,117 +194,75 @@ class FloatingTextEdit(CustomTextEdit):
         super().__init__(parent)
         self.setup_ui()
         
+        # Thêm timer để theo dõi và cập nhật vị trí
+        self.position_timer = QTimer(self)
+        self.position_timer.setInterval(100)  # Cập nhật mỗi 100ms
+        self.position_timer.timeout.connect(self.update_position)
+        self.position_timer.start()
+        
     def setup_ui(self):
         """Setup cho FloatingTextEdit"""
-        # Cho phép trong suốt hoàn toàn
+        # Cho phép trong suốt
         self.setAttribute(Qt.WA_TranslucentBackground)
         
-        # Style cơ bản - chỉ có background màu đen trong suốt, không có viền
+        # Style với text được căn giữa hoàn toàn
         self.setStyleSheet("""
             FloatingTextEdit {
                 background-color: rgba(43, 43, 43, 0.8);
                 color: white;
                 border: none;
-                padding: 0px 8px;
+                border-radius: 4px;
+                padding: 15px 20px;
+                font-family: 'Segoe UI', sans-serif;
+                font-size: 18px;
+                line-height: 1.2;
             }
             QScrollBar {
-                background: transparent;
                 width: 0px;
                 height: 0px;
             }
         """)
         
-        # Thiết lập căn giữa text theo chiều dọc
+        # Thiết lập căn giữa text
         self.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.setLineWrapMode(QTextEdit.NoWrap)
-        self.setAlignment(Qt.AlignVCenter)
+        self.setAlignment(Qt.AlignCenter)
         
-        # Font mặc định
-        self.current_font_size = 14
-        self.current_opacity = 0.8
-        font = QFont()
-        font.setPointSize(self.current_font_size)
-        self.setFont(font)
-        
-        # Kích thước mặc định
-        self.default_height = 40
+        # Kích thước cố định
+        self.setFixedHeight(60)
         self.setMinimumWidth(400)
         self.setMaximumWidth(1200)
-        self.setFixedHeight(self.default_height)
-        
-        # Context menu
-        self.setContextMenuPolicy(Qt.CustomContextMenu)
-        self.customContextMenuRequested.connect(self.show_context_menu)
-        
-        # Kết nối signal textChanged để điều chỉnh chiều cao
-        self.textChanged.connect(self.adjust_height)
 
-    def adjust_height(self):
-        """Tự động điều chỉnh chiều cao theo nội dung"""
-        # Tính toán chiều cao cần thiết dựa trên nội dung
-        doc = self.document()
-        doc_height = doc.size().height()
-        
-        # Thêm padding để text không bị sát cạnh
-        needed_height = int(doc_height + 24)
-        
-        # Giới hạn chiều cao từ default đến max
-        new_height = max(needed_height, self.default_height)
-        new_height = min(new_height, 200)
-        
-        # Chỉ thay đổi nếu chiều cao mới khác chiều cao hiện tại
-        if new_height != self.height():
-            self.setFixedHeight(new_height)
-            
-            # Cập nhật vị trí để giữ nguyên bottom edge
-            if hasattr(self, 'parent') and self.parent():
-                parent_height = self.parent().height()
+    def update_position(self):
+        """Cập nhật vị trí liên tục"""
+        if self.parent():
+            try:
+                # Lấy kích thước parent
                 parent_width = self.parent().width()
+                parent_height = self.parent().height()
                 
-                # Tính toán chiều rộng cần thiết
-                doc_width = doc.idealWidth() + 50  # Thêm margin
-                new_width = min(max(doc_width, self.minimumWidth()), self.maximumWidth())
+                # Tính toán chiều rộng (60% chiều rộng parent)
+                desired_width = parent_width * 0.6
+                width = max(400, min(desired_width, 1200))
                 
-                # Căn giữa theo chiều ngang và đặt ở dưới
-                new_x = int((parent_width - new_width) // 2)
-                new_y = int(parent_height - new_height - 40)
+                # Tính toán vị trí để căn giữa theo chiều ngang
+                x = (parent_width - width) / 2
                 
-                self.setGeometry(new_x, new_y, new_width, new_height)
-
-    def change_font_size(self, size):
-        """Thay đổi cỡ chữ"""
-        self.current_font_size = size
-        font = self.font()
-        font.setPointSize(size)
-        self.setFont(font)
-        self.adjust_height()
-
-    def change_opacity(self, opacity):
-        """Thay đổi độ trong suốt"""
-        self.current_opacity = opacity
-        self.setStyleSheet(f"""
-            FloatingTextEdit {{
-                background-color: rgba(43, 43, 43, {opacity});
-                color: white;
-                border: none;
-                padding: 0px 8px;
-            }}
-            QScrollBar {{
-                background: transparent;
-                width: 0px;
-                height: 0px;
-            }}
-        """)
+                # Khoảng cách cố định với bottom là 50px
+                y = parent_height - self.height() - 50
+                
+                # Cập nhật kích thước và vị trí
+                self.setFixedWidth(int(width))
+                self.move(int(x), int(y))
+                
+            except Exception as e:
+                logger.error(f"Error updating position: {str(e)}")
 
     def resizeEvent(self, event):
         """Xử lý resize event"""
         super().resizeEvent(event)
-        if hasattr(self, 'parent') and self.parent():
-            # Cập nhật vị trí để giữ nguyên bottom edge
-            parent_height = self.parent().height()
-            new_y = parent_height - self.height() - 40  # Cách bottom 40px
-            self.setGeometry(self.x(), new_y, self.width(), self.height())
+        self.update_position()
 
     def next_segment(self):
         """Reset kích thước khi chuyển segment"""
