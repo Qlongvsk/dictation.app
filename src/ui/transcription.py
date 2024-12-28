@@ -307,20 +307,32 @@ class FloatingTextEdit(CustomTextEdit):
         menu.exec_(self.mapToGlobal(pos))
 
 class TranscriptionApp(QWidget):
-    def __init__(self):
+    def __init__(self, video_file=None, subtitle_file=None):
         super().__init__()
         # Khởi tạo các thuộc tính
-        self.video_file = None
-        self.subtitle_file = None
+        self.video_file = video_file
+        self.subtitle_file = subtitle_file
         self.segments = None
-        self.current_segment_index = 0
+        self.current_segment_index = 1
         self.timer = QTimer()
         self.segment_timer = QTimer()
-        self.replay_count = 1  # Thêm replay_count với giá trị mặc định
         
         # Khởi tạo managers và UI
         self.init_managers()
         self.init_ui()
+        
+        # Nếu có file video và subtitle, load ngay
+        if self.video_file and self.subtitle_file:
+            try:
+                if not self.load_video():
+                    raise Exception("Failed to load video")
+                if not self.load_subtitles():
+                    raise Exception("Failed to load subtitles")
+                # Load tiến trình học cũ
+                self.load_progress()
+            except Exception as e:
+                logger.error(f"Error loading files: {str(e)}")
+                raise
 
     def init_managers(self):
         """Khởi tạo các manager"""
@@ -544,6 +556,9 @@ class TranscriptionApp(QWidget):
     def load_video(self):
         """Load file video"""
         try:
+            if not self.video_file:
+                return False
+            
             # Khởi tạo VLC player
             self.instance = vlc.Instance()
             self.player = self.instance.media_player_new()
@@ -559,16 +574,19 @@ class TranscriptionApp(QWidget):
                 self.player.set_hwnd(self.video_frame.winId())
             elif sys.platform == "darwin":
                 self.player.set_nsobject(int(self.video_frame.winId()))
-                
+            
             return True
             
         except Exception as e:
             logger.error(f"Error loading video: {str(e)}")
             return False
-
+            
     def load_subtitles(self):
         """Load và xử lý file phụ đề"""
         try:
+            if not self.subtitle_file:
+                return False
+                
             # Tải phụ đề
             self.video_processor = VideoProcessor()
             self.segments = self.video_processor.load_subtitles(self.subtitle_file)
@@ -576,26 +594,10 @@ class TranscriptionApp(QWidget):
                 raise Exception("No segments found in subtitle file")
             
             # Đặt vị trí video tại segment đầu tiên
-            self.current_segment_index = 1
             if self.segments:
-                first_segment = self.segments[0]
-                start_time = first_segment["start_time"]
-                end_time = first_segment["end_time"]
+                self.current_segment_index = 1
+                self.play_current_segment()
                 
-                # Chuyển đổi thời gian
-                start_ms = self.video_processor.time_to_milliseconds(start_time)
-                end_ms = self.video_processor.time_to_milliseconds(end_time)
-                
-                # Set vị trí và timer
-                self.player.set_time(int(start_ms))
-                duration = end_ms - start_ms
-                self.timer.start(int(duration))
-                
-            # Cập nhật giao diện
-            self.text_edit.clear()
-            self.update_button_states()
-            self.word_count_widget.update_count(0, 0, 0)  # Reset word count
-            
             # Cập nhật segment count
             total_segments = len(self.segments)
             self.segment_count_widget.update_count(
@@ -667,7 +669,7 @@ class TranscriptionApp(QWidget):
         return ' '.join(text.lower().split())
 
     def highlight_text(self, current_text, correct_text, current_word_index=0):
-        """Highlight text khi gõ"""
+        """Highlight text khi g"""
         try:
             if not self.text_edit:
                 return

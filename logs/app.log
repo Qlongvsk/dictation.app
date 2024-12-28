@@ -59,3 +59,25 @@
 2024-12-29 00:22:36,585 - src.ui.transcription - INFO - Progress saved: segment 5
 2024-12-29 00:22:52,661 - src.ui.transcription - INFO - Progress loaded: segment 5
 2024-12-29 00:23:30,930 - src.ui.transcription - INFO - Progress saved: segment 6
+2024-12-29 00:40:22,110 - src.ui.dashboard - ERROR - Error loading current video: 'Dashboard' object has no attribute 'progress_manager'
+2024-12-29 00:40:36,807 - src.ui.transcription - INFO - Progress loaded: segment 4
+2024-12-29 00:41:00,978 - src.ui.dashboard - ERROR - Error loading current video: 'Dashboard' object has no attribute 'progress_manager'
+2024-12-29 00:42:41,682 - src.ui.dashboard - ERROR - Error continuing practice: TranscriptionApp.__init__() got an unexpected keyword argument 'video_file'
+2024-12-29 00:44:42,743 - src.ui.transcription - ERROR - Error loading video: 'VideoPlayer' object has no attribute 'load_video'
+2024-12-29 00:44:42,745 - src.ui.transcription - ERROR - Error loading files: Failed to load video
+2024-12-29 00:44:42,745 - src.ui.dashboard - ERROR - Error continuing practice: Failed to load video
+2024-12-29 00:46:29,651 - src.ui.transcription - INFO - Progress loaded: segment 4
+2024-12-29 00:46:45,344 - src.ui.transcription - INFO - Progress saved: segment 5
+2024-12-29 00:46:50,645 - src.ui.transcription - INFO - Progress saved: segment 4
+2024-12-29 00:46:53,488 - src.ui.transcription - INFO - Progress saved: segment 3
+2024-12-29 00:46:58,947 - src.ui.transcription - INFO - Progress saved: segment 2
+2024-12-29 00:47:01,297 - src.ui.transcription - INFO - Progress saved: segment 1
+2024-12-29 00:47:04,849 - src.ui.transcription - INFO - Progress saved: segment 2
+2024-12-29 00:47:08,257 - src.ui.transcription - INFO - Progress saved: segment 3
+2024-12-29 00:47:14,174 - src.ui.transcription - INFO - Progress saved: segment 4
+2024-12-29 00:47:29,155 - src.ui.transcription - INFO - Progress saved: segment 5
+2024-12-29 00:47:34,277 - src.ui.transcription - INFO - Progress saved: segment 6
+2024-12-29 00:47:37,662 - src.ui.transcription - INFO - Progress saved: segment 7
+2024-12-29 00:47:45,905 - src.ui.transcription - INFO - Progress saved: segment 8
+2024-12-29 00:47:51,544 - src.ui.transcription - INFO - Progress saved: segment 9
+2024-12-29 00:47:58,619 - src.ui.transcription - INFO - Progress saved: segment 10

@@ -151,10 +151,20 @@ class ProgressManager:
             return None
             
     def update_practice_time(self, seconds):
-        """Cập nhật t��ng thời gian luyện tập"""
+        """Cập nhật tổng thời gian luyện tập"""
         try:
             self.progress["total_practice_time"] += seconds
             return self.save_progress()
         except Exception as e:
             logger.error(f"Error updating practice time: {str(e)}")
             return False 
+
+    def get_current_video(self):
+        """Lấy thông tin video đang học dở"""
+        try:
+            if "current_video" in self.progress:
+                return self.progress["current_video"]
+            return None
+        except Exception as e:
+            logger.error(f"Error getting current video: {str(e)}")
+            return None 
