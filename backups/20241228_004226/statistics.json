@@ -1,0 +1,23 @@
+{
+    "daily_stats": {
+        "2024-12-28": {
+            "sessions": {
+                "e5492b66-fa24-4d14-b33e-5580d02e0efd": [
+                    {
+                        "accuracy": 0,
+                        "typing_speed": 0,
+                        "time_taken": 0,
+                        "segments_completed": 44
+                    }
+                ]
+            },
+            "total_time": 0,
+            "average_accuracy": 0.0,
+            "average_speed": 0.0,
+            "segments_completed": 1
+        }
+    },
+    "total_practice_time": 0,
+    "total_segments_completed": 1,
+    "achievements": []
+}

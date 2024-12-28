@@ -1,0 +1,305 @@
+{
+    "sessions": [
+        {
+            "id": "session_001",
+            "name": "English Practice 01",
+            "video_path": "path/to/video.mp4",
+            "subtitle_path": "path/to/subtitle.srt",
+            "created_date": "2024-01-01T10:00:00",
+            "last_accessed": "2024-01-01T11:30:00",
+            "progress": {
+                "total_segments": 50,
+                "completed_segments": 30,
+                "current_segment": 31,
+                "accuracy": 85.5
+            },
+            "segments_data": {
+                "1": {
+                    "attempts": 2,
+                    "accuracy": 90,
+                    "completed": true
+                },
+                "2": {
+                    "attempts": 1,
+                    "accuracy": 85,
+                    "completed": true
+                },
+                "3": {
+                    "attempts": 3,
+                    "accuracy": 75,
+                    "completed": false
+                }
+            }
+        },
+        {
+            "id": "c1e4ba03-c77d-499f-9110-d70f46d59b2e",
+            "name": "Sakamoto Maaya _ Maaya Sakamoto Anime Voice Actress _ 坂本 真綾 _ Part 1",
+            "video_path": "C:/Users/quang/Downloads/Video/Sakamoto Maaya _ Maaya Sakamoto Anime Voice Actress _ 坂本 真綾 _ Part 1.mp4",
+            "subtitle_path": "C:/Users/quang/Downloads/Video/Watch Made in Abyss · Miruro - https---www.miruro.tv-watch.id=97986&ep=1_2.ts.srt",
+            "created_date": "2024-12-27T23:40:00.284801",
+            "last_accessed": "2024-12-27T23:40:00.285800",
+            "progress": {
+                "total_segments": 0,
+                "completed_segments": 0,
+                "current_segment": 1,
+                "accuracy": 0
+            },
+            "segments_data": {}
+        },
+        {
+            "id": "d13f6dcc-c093-424e-9411-7fd40ad37e5e",
+            "name": "Sakamoto Maaya _ Maaya Sakamoto Anime Voice Actress _ 坂本 真綾 _ Part 1",
+            "video_path": "C:/Users/quang/Downloads/Video/Sakamoto Maaya _ Maaya Sakamoto Anime Voice Actress _ 坂本 真綾 _ Part 1.mp4",
+            "subtitle_path": "C:/Users/quang/Downloads/Video/Watch Made in Abyss · Miruro - https---www.miruro.tv-watch.id=97986&ep=1_2.ts.srt",
+            "created_date": "2024-12-27T23:43:54.248358",
+            "last_accessed": "2024-12-27T23:43:54.248358",
+            "progress": {
+                "total_segments": 0,
+                "completed_segments": 0,
+                "current_segment": 1,
+                "accuracy": 0
+            },
+            "segments_data": {}
+        },
+        {
+            "id": "effe3713-797d-4fd3-b5b7-3615566f12b7",
+            "name": "Sakamoto Maaya _ Maaya Sakamoto Anime Voice Actress _ 坂本 真綾 _ Part 1",
+            "video_path": "C:/Users/quang/Downloads/Video/Sakamoto Maaya _ Maaya Sakamoto Anime Voice Actress _ 坂本 真綾 _ Part 1.mp4",
+            "subtitle_path": "C:/Users/quang/Downloads/Video/Watch Made in Abyss · Miruro - https---www.miruro.tv-watch.id=97986&ep=1_2.ts.srt",
+            "created_date": "2024-12-27T23:46:41.559664",
+            "last_accessed": "2024-12-27T23:46:41.559664",
+            "progress": {
+                "total_segments": 0,
+                "completed_segments": 0,
+                "current_segment": 1,
+                "accuracy": 0
+            },
+            "segments_data": {}
+        },
+        {
+            "id": "0f9e43fe-084d-4df7-a7d5-b5c65e60a8b7",
+            "name": "output file",
+            "video_path": "C:/Users/quang/Downloads/Video/output file.mp4",
+            "subtitle_path": "C:/Users/quang/Downloads/Video/Watch Made in Abyss · Miruro - https---www.miruro.tv-watch.id=97986&ep=1_2.ts.srt",
+            "created_date": "2024-12-27T23:49:50.470412",
+            "last_accessed": "2024-12-27T23:49:50.470412",
+            "progress": {
+                "total_segments": 0,
+                "completed_segments": 0,
+                "current_segment": 1,
+                "accuracy": 0
+            },
+            "segments_data": {}
+        },
+        {
+            "id": "a305049f-8118-4d65-8a4f-662f3f9de61a",
+            "name": "output file",
+            "video_path": "C:/Users/quang/Downloads/Video/output file.mp4",
+            "subtitle_path": "C:/Users/quang/Downloads/Video/Watch Made in Abyss · Miruro - https---www.miruro.tv-watch.id=97986&ep=1_2.ts.srt",
+            "created_date": "2024-12-27T23:52:18.197156",
+            "last_accessed": "2024-12-27T23:52:18.197156",
+            "progress": {
+                "total_segments": 0,
+                "completed_segments": 0,
+                "current_segment": 1,
+                "accuracy": 0
+            },
+            "segments_data": {}
+        },
+        {
+            "id": "527aba0d-8025-4731-9086-15ec52ed37ea",
+            "name": "output file",
+            "video_path": "C:/Users/quang/Downloads/Video/output file.mp4",
+            "subtitle_path": "C:/Users/quang/Downloads/Video/Watch Made in Abyss · Miruro - https---www.miruro.tv-watch.id=97986&ep=1_2.ts.srt",
+            "created_date": "2024-12-28T00:01:21.773198",
+            "last_accessed": "2024-12-28T00:01:21.773198",
+            "progress": {
+                "total_segments": 0,
+                "completed_segments": 0,
+                "current_segment": 1,
+                "accuracy": 0
+            },
+            "segments_data": {}
+        },
+        {
+            "id": "cbccb625-c175-4878-ac0a-7c13a2a41854",
+            "name": "output file",
+            "video_path": "C:/Users/quang/Downloads/Video/output file.mp4",
+            "subtitle_path": "C:/Users/quang/Downloads/Video/Watch Made in Abyss · Miruro - https---www.miruro.tv-watch.id=97986&ep=1_2.ts.srt",
+            "created_date": "2024-12-28T00:07:10.276225",
+            "last_accessed": "2024-12-28T00:07:10.276225",
+            "progress": {
+                "total_segments": 0,
+                "completed_segments": 0,
+                "current_segment": 1,
+                "accuracy": 0
+            },
+            "segments_data": {}
+        },
+        {
+            "id": "e7c470a2-b94e-4896-86d7-8aa1d24e9c07",
+            "name": "output file",
+            "video_path": "C:/Users/quang/Downloads/Video/output file.mp4",
+            "subtitle_path": "C:/Users/quang/Downloads/Video/Watch Made in Abyss · Miruro - https---www.miruro.tv-watch.id=97986&ep=1_2.ts.srt",
+            "created_date": "2024-12-28T00:08:58.982436",
+            "last_accessed": "2024-12-28T00:08:58.982436",
+            "progress": {
+                "total_segments": 0,
+                "completed_segments": 0,
+                "current_segment": 1,
+                "accuracy": 0
+            },
+            "segments_data": {}
+        },
+        {
+            "id": "a0992fdd-5516-4999-873e-3c007dfdb211",
+            "name": "output file",
+            "video_path": "C:/Users/quang/Downloads/Video/output file.mp4",
+            "subtitle_path": "C:/Users/quang/Downloads/Video/Watch Made in Abyss · Miruro - https---www.miruro.tv-watch.id=97986&ep=1_2.ts.srt",
+            "created_date": "2024-12-28T00:10:29.526360",
+            "last_accessed": "2024-12-28T00:10:29.526360",
+            "progress": {
+                "total_segments": 0,
+                "completed_segments": 0,
+                "current_segment": 1,
+                "accuracy": 0
+            },
+            "segments_data": {}
+        },
+        {
+            "id": "1ca3ecf2-fd9a-48b4-af1c-d12f09461ba3",
+            "name": "output file",
+            "video_path": "C:/Users/quang/Downloads/Video/output file.mp4",
+            "subtitle_path": "C:/Users/quang/Downloads/Video/Watch Made in Abyss · Miruro - https---www.miruro.tv-watch.id=97986&ep=1_2.ts.srt",
+            "created_date": "2024-12-28T00:13:32.368044",
+            "last_accessed": "2024-12-28T00:13:32.368044",
+            "progress": {
+                "total_segments": 0,
+                "completed_segments": 0,
+                "current_segment": 1,
+                "accuracy": 0
+            },
+            "segments_data": {}
+        },
+        {
+            "id": "c9afebb9-d560-4c19-91a5-d05ce632ec7d",
+            "name": "output file",
+            "video_path": "C:/Users/quang/Downloads/Video/output file.mp4",
+            "subtitle_path": "C:/Users/quang/Downloads/Video/Watch Made in Abyss · Miruro - https---www.miruro.tv-watch.id=97986&ep=1_2.ts.srt",
+            "created_date": "2024-12-28T00:17:27.085884",
+            "last_accessed": "2024-12-28T00:17:27.085884",
+            "progress": {
+                "total_segments": 0,
+                "completed_segments": 0,
+                "current_segment": 1,
+                "accuracy": 0
+            },
+            "segments_data": {}
+        },
+        {
+            "id": "926db3d3-9e66-4a2b-830b-07faff351a49",
+            "name": "Watch Made in Abyss · Miruro - https---www.miruro.tv-watch.id=97986&ep=1",
+            "video_path": "C:/Users/quang/Downloads/Video/Watch Made in Abyss · Miruro - https---www.miruro.tv-watch.id=97986&ep=1.mp4",
+            "subtitle_path": "C:/Users/quang/Downloads/Video/Watch Made in Abyss · Miruro - https---www.miruro.tv-watch.id=97986&ep=1_2.ts.srt",
+            "created_date": "2024-12-28T00:19:37.933882",
+            "last_accessed": "2024-12-28T00:19:37.933882",
+            "progress": {
+                "total_segments": 0,
+                "completed_segments": 0,
+                "current_segment": 1,
+                "accuracy": 0
+            },
+            "segments_data": {}
+        },
+        {
+            "id": "4caa9c66-b336-42f1-9130-8769f1256c23",
+            "name": "output file",
+            "video_path": "C:/Users/quang/Downloads/Video/output file.mp4",
+            "subtitle_path": "C:/Users/quang/Downloads/Video/Watch Made in Abyss · Miruro - https---www.miruro.tv-watch.id=97986&ep=1_2.ts.srt",
+            "created_date": "2024-12-28T00:20:25.875821",
+            "last_accessed": "2024-12-28T00:20:25.875821",
+            "progress": {
+                "total_segments": 0,
+                "completed_segments": 0,
+                "current_segment": 1,
+                "accuracy": 0
+            },
+            "segments_data": {}
+        },
+        {
+            "id": "3f308f37-fde9-438d-bfc3-97b50e26e90c",
+            "name": "Watch Made in Abyss · Miruro - https---www.miruro.tv-watch.id=97986&ep=1",
+            "video_path": "C:/Users/quang/Downloads/Video/Watch Made in Abyss · Miruro - https---www.miruro.tv-watch.id=97986&ep=1.mp4",
+            "subtitle_path": "C:/Users/quang/Downloads/Video/Watch Made in Abyss · Miruro - https---www.miruro.tv-watch.id=97986&ep=1_2.ts.srt",
+            "created_date": "2024-12-28T00:21:11.897015",
+            "last_accessed": "2024-12-28T00:21:11.897015",
+            "progress": {
+                "total_segments": 0,
+                "completed_segments": 0,
+                "current_segment": 1,
+                "accuracy": 0
+            },
+            "segments_data": {}
+        },
+        {
+            "id": "53487c49-322d-4b24-acd1-cc7362d4df6d",
+            "name": "output file",
+            "video_path": "C:/Users/quang/Downloads/Video/output file.mp4",
+            "subtitle_path": "C:/Users/quang/Downloads/Video/Watch Made in Abyss · Miruro - https---www.miruro.tv-watch.id=97986&ep=1_2.ts.srt",
+            "created_date": "2024-12-28T00:21:18.683326",
+            "last_accessed": "2024-12-28T00:21:18.683326",
+            "progress": {
+                "total_segments": 0,
+                "completed_segments": 0,
+                "current_segment": 1,
+                "accuracy": 0
+            },
+            "segments_data": {}
+        },
+        {
+            "id": "119ce790-0f02-4a03-8112-8a378dd2fa0e",
+            "name": "output file",
+            "video_path": "C:/Users/quang/Downloads/Video/output file.mp4",
+            "subtitle_path": "C:/Users/quang/Downloads/Video/Watch Made in Abyss · Miruro - https---www.miruro.tv-watch.id=97986&ep=1_2.ts.srt",
+            "created_date": "2024-12-28T00:21:47.523336",
+            "last_accessed": "2024-12-28T00:21:47.523336",
+            "progress": {
+                "total_segments": 0,
+                "completed_segments": 0,
+                "current_segment": 1,
+                "accuracy": 0
+            },
+            "segments_data": {}
+        },
+        {
+            "id": "a738dca4-fb7a-470c-b845-88ffa53336d2",
+            "name": "output file",
+            "video_path": "C:/Users/quang/Downloads/Video/output file.mp4",
+            "subtitle_path": "C:/Users/quang/Downloads/Video/Watch Made in Abyss · Miruro - https---www.miruro.tv-watch.id=97986&ep=1_2.ts.srt",
+            "created_date": "2024-12-28T00:22:42.224795",
+            "last_accessed": "2024-12-28T00:22:42.225794",
+            "progress": {
+                "total_segments": 0,
+                "completed_segments": 0,
+                "current_segment": 1,
+                "accuracy": 0
+            },
+            "segments_data": {}
+        },
+        {
+            "id": "e5492b66-fa24-4d14-b33e-5580d02e0efd",
+            "name": "output file",
+            "video_path": "C:/Users/quang/Downloads/Video/output file.mp4",
+            "subtitle_path": "C:/Users/quang/Downloads/Video/Watch Made in Abyss · Miruro - https---www.miruro.tv-watch.id=97986&ep=1_2.ts.srt",
+            "created_date": "2024-12-28T00:27:59.986137",
+            "last_accessed": "2024-12-28T00:27:59.986137",
+            "progress": {
+                "total_segments": 0,
+                "completed_segments": 0,
+                "current_segment": 1,
+                "accuracy": 0
+            },
+            "segments_data": {}
+        }
+    ]
+}

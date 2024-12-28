@@ -1,0 +1,32 @@
+{
+    "version": "1.2",
+    "last_session": "d7491b9c-62fa-43d7-a156-781249cc3619",
+    "practice_streak": 1,
+    "last_practice_date": "2024-12-28",
+    "total_practice_time": 3600,
+    "completed_videos": [
+        {
+            "id": "video_001",
+            "name": "First Practice Video",
+            "completed_date": "2024-12-27",
+            "accuracy": 92.5,
+            "total_segments": 50,
+            "completed_segments": 50,
+            "total_time": 1800
+        }
+    ],
+    "settings": {
+        "auto_play_next": true,
+        "min_accuracy": 95,
+        "typing_speed_goal": 60,
+        "show_typing_speed": true
+    },
+    "achievements": [
+        {
+            "id": "first_perfect",
+            "name": "First Perfect Segment",
+            "date": "2024-12-27",
+            "description": "Complete a segment with 100% accuracy"
+        }
+    ]
+}

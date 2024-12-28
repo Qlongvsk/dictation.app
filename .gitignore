@@ -1,0 +1,15 @@
+﻿__pycache__/
+*.pyc
+data/
+.env
+build/
+dist/
+*.pkg
+*.exe
+*.zip
+videos/
+cache/
+*.mp4
+*.ts
+*.avi
+*.mkv
