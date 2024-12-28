@@ -38,26 +38,34 @@ class ProgressManager:
             logger.error(f"Error creating default progress: {str(e)}")
             return False
         
-    def save_progress(self, progress_data=None):
-        """Lưu dữ liệu tiến độ"""
+    def save_progress(self, progress_data):
+        """Lưu tiến trình học tập"""
         try:
-            if progress_data:
-                # Cập nhật các trường từ progress_data
-                self.progress.update({
-                    "video_file": progress_data["video_file"],
-                    "subtitle_file": progress_data["subtitle_file"],
-                    "current_segment_index": progress_data["current_segment_index"]
-                })
+            video_file = progress_data["video_file"]
+            self.progress["current_video"] = {
+                "video_file": video_file,
+                "subtitle_file": progress_data["subtitle_file"],
+                "current_segment_index": progress_data["current_segment_index"]
+            }
             
-            # Lưu xuống file
-            with open(self.progress_file, 'w', encoding='utf-8') as f:
+            with open(self.progress_file, "w", encoding="utf-8") as f:
                 json.dump(self.progress, f, indent=4, ensure_ascii=False)
-            
             return True
-            
         except Exception as e:
             logger.error(f"Error saving progress: {str(e)}")
             return False
+
+    def get_progress(self, video_file):
+        """Lấy tiến trình học tập của video"""
+        try:
+            if "current_video" in self.progress:
+                current = self.progress["current_video"]
+                if current["video_file"] == video_file:
+                    return current
+            return None
+        except Exception as e:
+            logger.error(f"Error getting progress: {str(e)}")
+            return None
             
     def update_practice_streak(self):
         """Cập nhật chuỗi ngày luyện tập"""
@@ -143,7 +151,7 @@ class ProgressManager:
             return None
             
     def update_practice_time(self, seconds):
-        """Cập nhật tổng thời gian luyện tập"""
+        """Cập nhật t��ng thời gian luyện tập"""
         try:
             self.progress["total_practice_time"] += seconds
             return self.save_progress()

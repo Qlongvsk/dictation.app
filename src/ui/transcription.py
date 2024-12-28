@@ -188,6 +188,25 @@ class WordCountWidget(QLabel):
         
         self.setText(f"Words: {correct}/{total} [{progress}] {accuracy:.1f}%")
 
+class SegmentCountWidget(QLabel):
+    """Widget hiển thị số segment đã hoàn thành"""
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setStyleSheet("""
+            QLabel {
+                background-color: #3d3d3d;
+                color: white;
+                border: none;
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        """)
+        self.update_count(0, 0, 0)
+        
+    def update_count(self, current, total, progress):
+        """Cập nhật số segment đã hoàn thành"""
+        self.setText(f"Segments: {current}/{total} [{current}/{total}] {progress:.1f}%")
+
 class FloatingTextEdit(CustomTextEdit):
     """Widget nhập liệu nổi trên video"""
     def __init__(self, parent=None):
@@ -359,8 +378,15 @@ class TranscriptionApp(QWidget):
         # Status bar và word count ở dưới
         status_container = QWidget()
         status_layout = QHBoxLayout(status_container)
+        
+        # Thêm segment count widget
+        self.segment_count_widget = SegmentCountWidget()
+        status_layout.addWidget(self.segment_count_widget)
+        
+        # Thêm word count widget
         self.word_count_widget = WordCountWidget()
         status_layout.addWidget(self.word_count_widget)
+        
         left_layout.addWidget(status_container)
         
         # Text edit nổi trên video - Sửa lại parent
@@ -477,42 +503,15 @@ class TranscriptionApp(QWidget):
                 "Video Files (*.mp4 *.avi *.mkv *.ts)"
             )
             if not video_file:
-                return
-
-            # Nếu là file .ts, tự động chuyển đi
-            if video_file.lower().endswith('.ts'):
-                try:
-                    # Tạo và hiển thị dialog tiền trình
-                    progress_dialog = ConversionProgressDialog(self)
-                    
-                    # Kết nối signal từ converter với dialog
-                    self.video_converter.progress_updated.connect(
-                        progress_dialog.update_progress
-                    )
-                    
-                    # Hiển thị dialog
-                    progress_dialog.show()
-                    
-                    # Chuyển đổi video
-                    video_file = self.video_converter.convert_ts_to_mp4(video_file)
-                    
-                    # Đóng dialog
-                    progress_dialog.close()
-                    
-                    # Ngắt kết nối signal
-                    self.video_converter.progress_updated.disconnect()
-                    
-                    self.show_message("Success", "Conversion completed successfully!")
-                except Exception as e:
-                    self.show_error_message("Conversion Error", str(e))
-                    return
+                return False
 
             # Chọn file phụ đề
             subtitle_file, _ = QFileDialog.getOpenFileName(
-                self, "Open Subtitle File", "", "Subtitle Files (*.srt)"
+                self, "Open Subtitle File", "", 
+                "Subtitle Files (*.srt)"
             )
             if not subtitle_file:
-                return
+                return False
 
             # Cập nhật đường dẫn file
             self.video_file = video_file
@@ -523,6 +522,9 @@ class TranscriptionApp(QWidget):
                 raise Exception("Failed to load video")
             if not self.load_subtitles():
                 raise Exception("Failed to load subtitles")
+            
+            # Load tiến trình học cũ nếu có
+            self.load_progress()
 
             return True
 
@@ -565,7 +567,7 @@ class TranscriptionApp(QWidget):
             return False
 
     def load_subtitles(self):
-        """Load và x lý file phụ đề"""
+        """Load và xử lý file phụ đề"""
         try:
             # Tải phụ đề
             self.video_processor = VideoProcessor()
@@ -593,6 +595,14 @@ class TranscriptionApp(QWidget):
             self.text_edit.clear()
             self.update_button_states()
             self.word_count_widget.update_count(0, 0, 0)  # Reset word count
+            
+            # Cập nhật segment count
+            total_segments = len(self.segments)
+            self.segment_count_widget.update_count(
+                self.current_segment_index,
+                total_segments,
+                (self.current_segment_index / total_segments * 100)
+            )
             
             return True
             
@@ -736,7 +746,15 @@ class TranscriptionApp(QWidget):
             self.play_current_segment()
             self.text_edit.clear()
             
-            # Reset status bar với số từ của câu mới
+            # Cập nhật segment count
+            total_segments = len(self.segments)
+            self.segment_count_widget.update_count(
+                self.current_segment_index,
+                total_segments,
+                (self.current_segment_index / total_segments * 100)
+            )
+            
+            # Reset word count với số từ của câu mới
             total_words = len(self.segments[self.current_segment_index - 1]["text"].split())
             self.word_count_widget.update_count(0, total_words, 0)
             
@@ -750,7 +768,15 @@ class TranscriptionApp(QWidget):
             self.play_current_segment()
             self.text_edit.clear()
             
-            # Reset status bar với số từ của câu mới
+            # Cập nhật segment count
+            total_segments = len(self.segments)
+            self.segment_count_widget.update_count(
+                self.current_segment_index,
+                total_segments,
+                (self.current_segment_index / total_segments * 100)
+            )
+            
+            # Reset word count với số từ của câu mới
             total_words = len(self.segments[self.current_segment_index - 1]["text"].split())
             self.word_count_widget.update_count(0, total_words, 0)
             
@@ -861,13 +887,13 @@ class TranscriptionApp(QWidget):
         """Lưu tiến trình học"""
         if self.video_file and self.subtitle_file:
             try:
-                self.progress_manager.save_progress({
+                progress_data = {
                     "video_file": self.video_file,
                     "subtitle_file": self.subtitle_file,
                     "current_segment_index": self.current_segment_index
-                    # Bỏ replay_count vì không cần thiết
-                })
-                
+                }
+                self.progress_manager.save_progress(progress_data)
+                logger.info(f"Progress saved: segment {self.current_segment_index}")
             except Exception as e:
                 logger.error(f"Error saving progress: {str(e)}")
                 self.show_error_message("Error", "Could not save progress")
@@ -875,13 +901,20 @@ class TranscriptionApp(QWidget):
     def load_progress(self):
         """Load tiến trình học cũ"""
         try:
-            progress = self.progress_manager.load_progress()
-            if progress:
-                self.video_file = progress["video_file"]
-                self.subtitle_file = progress["subtitle_file"]
-                if self.load_video() and self.load_subtitles():
+            if self.video_file and self.subtitle_file:
+                progress = self.progress_manager.get_progress(self.video_file)
+                if progress and progress["subtitle_file"] == self.subtitle_file:
                     self.current_segment_index = progress["current_segment_index"]
                     self.play_current_segment()
+                    
+                    # Cập nhật segment count
+                    total_segments = len(self.segments)
+                    self.segment_count_widget.update_count(
+                        self.current_segment_index,
+                        total_segments,
+                        (self.current_segment_index / total_segments * 100)
+                    )
+                    logger.info(f"Progress loaded: segment {self.current_segment_index}")
                     return True
             return False
         except Exception as e:

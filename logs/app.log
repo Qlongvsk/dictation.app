@@ -47,3 +47,15 @@
 2024-12-28 12:15:27,585 - src.ui.transcription - ERROR - Error handling text changed: 'QWidget' object has no attribute 'segments'
 2024-12-28 12:15:27,718 - src.ui.transcription - ERROR - Error handling text changed: 'QWidget' object has no attribute 'segments'
 2024-12-28 12:15:28,324 - src.ui.transcription - ERROR - Error handling text changed: 'QWidget' object has no attribute 'segments'
+2024-12-29 00:20:13,215 - src.ui.transcription - INFO - Progress saved: segment 2
+2024-12-29 00:20:23,036 - src.ui.transcription - INFO - Progress saved: segment 3
+2024-12-29 00:20:30,519 - src.ui.transcription - INFO - Progress saved: segment 4
+2024-12-29 00:20:34,847 - src.ui.transcription - INFO - Progress saved: segment 4
+2024-12-29 00:20:55,806 - src.ui.transcription - INFO - Progress loaded: segment 4
+2024-12-29 00:21:51,369 - src.ui.transcription - INFO - Progress saved: segment 2
+2024-12-29 00:22:34,574 - src.ui.transcription - INFO - Progress saved: segment 2
+2024-12-29 00:22:35,200 - src.ui.transcription - INFO - Progress saved: segment 3
+2024-12-29 00:22:35,830 - src.ui.transcription - INFO - Progress saved: segment 4
+2024-12-29 00:22:36,585 - src.ui.transcription - INFO - Progress saved: segment 5
+2024-12-29 00:22:52,661 - src.ui.transcription - INFO - Progress loaded: segment 5
+2024-12-29 00:23:30,930 - src.ui.transcription - INFO - Progress saved: segment 6
