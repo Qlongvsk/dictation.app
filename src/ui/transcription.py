@@ -34,6 +34,8 @@ from src.ui.progress_dialog import ConversionProgressDialog
 from core.data_manager import DataManager
 from src.ui.video_player import VideoPlayer
 from src.ui.video_controls import VideoControls
+from core.note_manager import NoteManager
+from src.ui.note_dialog import NoteDialog
 
 logger = logging.getLogger(__name__)
 
@@ -164,6 +166,25 @@ class CustomTextEdit(QTextEdit):
             self.ctrl_pressed = False
         super().keyReleaseEvent(event)
 
+    def contextMenuEvent(self, event):
+        menu = self.createStandardContextMenu()
+        
+        # Add save to notes action if text is selected
+        cursor = self.textCursor()
+        if cursor.hasSelection():
+            save_action = menu.addAction("Save to Notes")
+            save_action.triggered.connect(
+                lambda: self.parent_app.save_selected_text()
+            )
+        
+        # Add save segment action
+        save_segment_action = menu.addAction("Save Current Segment")
+        save_segment_action.triggered.connect(
+            lambda: self.parent_app.save_current_segment()
+        )
+            
+        menu.exec_(event.globalPos())
+
 class WordCountWidget(QLabel):
     """Widget hiển thị số từ và độ chính xác"""
     def __init__(self, parent=None):
@@ -215,7 +236,7 @@ class FloatingTextEdit(CustomTextEdit):
         
         # Thêm timer để theo dõi và cập nhật vị trí
         self.position_timer = QTimer(self)
-        self.position_timer.setInterval(100)  # Cập nhật mỗi 100ms
+        self.position_timer.setInterval(1)  # Cập nhật mỗi 100ms
         self.position_timer.timeout.connect(self.update_position)
         self.position_timer.start()
         
@@ -224,7 +245,7 @@ class FloatingTextEdit(CustomTextEdit):
         # Cho phép trong suốt
         self.setAttribute(Qt.WA_TranslucentBackground)
         
-        # Style với text được căn giữa hoàn toàn
+        # Style v���i text được căn giữa hoàn toàn
         self.setStyleSheet("""
             FloatingTextEdit {
                 background-color: rgba(43, 43, 43, 0.8);
@@ -307,37 +328,52 @@ class FloatingTextEdit(CustomTextEdit):
         menu.exec_(self.mapToGlobal(pos))
 
 class TranscriptionApp(QWidget):
-    def __init__(self):
+    def __init__(self, video_file=None, subtitle_file=None):
         super().__init__()
         # Khởi tạo các thuộc tính
-        self.video_file = None
-        self.subtitle_file = None
+        self.video_file = video_file
+        self.subtitle_file = subtitle_file
         self.segments = None
-        self.current_segment_index = 0
+        self.current_segment_index = 1
         self.timer = QTimer()
         self.segment_timer = QTimer()
-        self.replay_count = 1  # Thêm replay_count với giá trị mặc định
         
         # Khởi tạo managers và UI
         self.init_managers()
         self.init_ui()
+        
+        # Nếu có file video và subtitle, load ngay
+        if self.video_file and self.subtitle_file:
+            try:
+                if not self.load_video():
+                    raise Exception("Failed to load video")
+                if not self.load_subtitles():
+                    raise Exception("Failed to load subtitles")
+                # Load tiến trình học cũ
+                self.load_progress()
+                # Load notes cũ nếu có
+                self.load_notes()
+            except Exception as e:
+                logger.error(f"Error loading files: {str(e)}")
+                raise
 
     def init_managers(self):
         """Khởi tạo các manager"""
         try:
             # Khởi tạo theo thứ tự phụ thuộc
-            self.config_manager = ConfigManager()
+            self.config_manager = ConfigManager()  # Khởi tạo config_manager trước
+            self.session_manager = SessionManager()
             self.data_manager = DataManager()
             self.statistics_manager = StatisticsManager(self.data_manager)
             self.achievement_manager = AchievementManager(self.statistics_manager)
-            self.session_manager = SessionManager()
             self.progress_manager = ProgressManager()
-            self.video_converter = VideoConverter()
+            self.backup_manager = BackupManager(self.config_manager)  # Truyền config_manager vào
             self.validation_manager = ValidationManager()
+            self.video_converter = VideoConverter()
+            self.note_manager = NoteManager()
             
             # Thiết lập error handler cho session manager
-            self.session_manager.set_error_handler(self.validation_manager)
-            
+            self.session_manager.error_handler = self.show_error_message
         except Exception as e:
             logger.error(f"Error initializing managers: {str(e)}")
             raise
@@ -456,6 +492,18 @@ class TranscriptionApp(QWidget):
         about_action = help_menu.addAction("About")
         about_action.triggered.connect(self.show_about)
         
+        # Add Notes menu
+        notes_menu = menu_bar.addMenu("Notes")
+        
+        show_notes_action = notes_menu.addAction("Show Notes")
+        show_notes_action.triggered.connect(self.show_notes)
+        show_notes_action.setShortcut("Ctrl+N")
+        
+        # Thêm action Save Current Segment
+        save_segment_action = notes_menu.addAction("Save Current Segment")
+        save_segment_action.triggered.connect(self.save_current_segment)
+        save_segment_action.setShortcut("Ctrl+S")  # Phím tắt Ctrl+S
+
     def setup_control_buttons(self, layout):
         """Thiết lập các nút điều khiển theo chiều dọc"""
         button_style = """
@@ -491,7 +539,7 @@ class TranscriptionApp(QWidget):
             btn.setStyleSheet(button_style)
             layout.addWidget(btn)
         
-        # Thêm spacer để đẩy các nút lên trên
+        # Thêm spacer để để các nút lên trên
         layout.addStretch()
 
     def load_files(self):
@@ -544,6 +592,9 @@ class TranscriptionApp(QWidget):
     def load_video(self):
         """Load file video"""
         try:
+            if not self.video_file:
+                return False
+            
             # Khởi tạo VLC player
             self.instance = vlc.Instance()
             self.player = self.instance.media_player_new()
@@ -559,16 +610,19 @@ class TranscriptionApp(QWidget):
                 self.player.set_hwnd(self.video_frame.winId())
             elif sys.platform == "darwin":
                 self.player.set_nsobject(int(self.video_frame.winId()))
-                
+            
             return True
             
         except Exception as e:
             logger.error(f"Error loading video: {str(e)}")
             return False
-
+            
     def load_subtitles(self):
         """Load và xử lý file phụ đề"""
         try:
+            if not self.subtitle_file:
+                return False
+                
             # Tải phụ đề
             self.video_processor = VideoProcessor()
             self.segments = self.video_processor.load_subtitles(self.subtitle_file)
@@ -576,26 +630,10 @@ class TranscriptionApp(QWidget):
                 raise Exception("No segments found in subtitle file")
             
             # Đặt vị trí video tại segment đầu tiên
-            self.current_segment_index = 1
             if self.segments:
-                first_segment = self.segments[0]
-                start_time = first_segment["start_time"]
-                end_time = first_segment["end_time"]
+                self.current_segment_index = 1
+                self.play_current_segment()
                 
-                # Chuyển đổi thời gian
-                start_ms = self.video_processor.time_to_milliseconds(start_time)
-                end_ms = self.video_processor.time_to_milliseconds(end_time)
-                
-                # Set vị trí và timer
-                self.player.set_time(int(start_ms))
-                duration = end_ms - start_ms
-                self.timer.start(int(duration))
-                
-            # Cập nhật giao diện
-            self.text_edit.clear()
-            self.update_button_states()
-            self.word_count_widget.update_count(0, 0, 0)  # Reset word count
-            
             # Cập nhật segment count
             total_segments = len(self.segments)
             self.segment_count_widget.update_count(
@@ -667,7 +705,7 @@ class TranscriptionApp(QWidget):
         return ' '.join(text.lower().split())
 
     def highlight_text(self, current_text, correct_text, current_word_index=0):
-        """Highlight text khi gõ"""
+        """Highlight text khi g"""
         try:
             if not self.text_edit:
                 return
@@ -789,39 +827,34 @@ class TranscriptionApp(QWidget):
 
     def play_current_segment(self):
         """Phát segment hiện tại"""
-        if not self.segments or not self.player:
-            return
-
         try:
-            segment = self.segments[self.current_segment_index - 1]
-            start_time = self.video_processor.time_to_milliseconds(segment["start_time"])
-            end_time = self.video_processor.time_to_milliseconds(segment["end_time"])
+            if not self.segments or not self.player:
+                return
             
-            # Thêm 2ms (không phải 2s) vào end_time
-            end_time += 0.002  # 2 milliseconds = 0.002 seconds
-
-            # Đặt thời gian bắt đầu
-            self.player.set_time(start_time)
+            # Lấy thông tin segment hiện tại
+            current_segment = self.segments[self.current_segment_index - 1]
+            start_time = current_segment["start_time"]
+            end_time = current_segment["end_time"]
             
-            # Cập nhật end time cho timer
-            self.segment_end_time = end_time
+            # Chuyển đổi thời gian sang milliseconds
+            start_ms = self.video_processor.time_to_milliseconds(start_time)
+            end_ms = self.video_processor.time_to_milliseconds(end_time)
             
-            # Bắt đầu phát
+            # Thêm 500ms vào thời gian kết thúc
+            end_ms += 400 # Thêm 0.5 giây
+            duration = end_ms - start_ms
+            
+            # Đặt vị trí video chính xác đến millisecond
+            self.player.set_time(int(start_ms))
             self.player.play()
             
-            # Khởi động timer để kiểm tra thời điểm kết thúc
-            self.segment_timer.stop()  # Dừng timer cũ
+            # Dừng video khi hết segment (đã bao gồm 500ms phụ trội)
+            self.segment_timer.stop()  # Dừng timer cũ nếu có
+            self.segment_timer.singleShot(duration, self.player.pause)
             
-            # Ngắt kết nối signal cũ nếu có
-            try:
-                self.segment_timer.timeout.disconnect()
-            except:
-                pass
-            
-            # Kết nối signal mới và start timer
-            self.segment_timer.setInterval(1)  # Kiểm tra mỗi 1ms
-            self.segment_timer.timeout.connect(self.check_segment_end)
-            self.segment_timer.start()
+            # Cập nhật word count
+            total_words = len(current_segment["text"].split())
+            self.word_count_widget.update_count(0, total_words, 0)
             
         except Exception as e:
             logger.error(f"Error playing segment: {str(e)}")
@@ -955,3 +988,39 @@ class TranscriptionApp(QWidget):
                     
         except Exception as e:
             logger.error(f"Error updating button states: {str(e)}") 
+
+    def show_notes(self):
+        """Hiển thị dialog notes"""
+        if self.video_file:
+            dialog = NoteDialog(self.note_manager, self.video_file, self)
+            dialog.exec_()
+
+    def save_selected_text(self):
+        """Lưu text đã chọn vào notes"""
+        cursor = self.text_edit.textCursor()
+        if cursor.hasSelection():
+            selected_text = cursor.selectedText()
+            self.note_manager.add_word(self.video_file, selected_text)
+            # Hiển thị thông báo nhỏ khi lưu thành công
+            QMessageBox.information(self, "Success", f"Saved word: {selected_text}")
+
+    def save_current_segment(self):
+        """Lưu segment hiện tại vào notes"""
+        if self.segments:
+            segment_text = self.segments[self.current_segment_index - 1]["text"]
+            self.note_manager.add_segment(self.video_file, segment_text)
+            # Hiển thị thông báo nhỏ khi lưu thành công
+            QMessageBox.information(self, "Success", "Current segment saved to notes")
+
+    def load_notes(self):
+        """Load notes từ file"""
+        try:
+            if self.video_file:
+                # Notes sẽ tự động được load khi mở NoteDialog
+                # Chỉ cần đảm bảo NoteManager đã được khởi tạo
+                if not hasattr(self, 'note_manager'):
+                    self.note_manager = NoteManager()
+                return True
+        except Exception as e:
+            logger.error(f"Error loading notes: {str(e)}")
+            return False 

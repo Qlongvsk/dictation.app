@@ -59,3 +59,100 @@
 2024-12-29 00:22:36,585 - src.ui.transcription - INFO - Progress saved: segment 5
 2024-12-29 00:22:52,661 - src.ui.transcription - INFO - Progress loaded: segment 5
 2024-12-29 00:23:30,930 - src.ui.transcription - INFO - Progress saved: segment 6
+2024-12-29 01:22:20,681 - src.ui.transcription - INFO - Progress loaded: segment 15
+2024-12-29 01:24:24,758 - src.ui.transcription - INFO - Progress loaded: segment 15
+2024-12-29 01:25:31,020 - src.ui.transcription - INFO - Progress loaded: segment 15
+2024-12-29 01:26:32,555 - src.ui.transcription - INFO - Progress loaded: segment 15
+2024-12-29 01:26:55,136 - src.ui.transcription - INFO - Progress loaded: segment 15
+2024-12-29 01:27:23,118 - src.ui.transcription - INFO - Progress loaded: segment 15
+2024-12-29 01:28:30,868 - src.ui.transcription - ERROR - Error initializing managers: AchievementManager.__init__() missing 1 required positional argument: 'statistics_manager'
+2024-12-29 01:28:30,869 - src.ui.dashboard - ERROR - Error continuing practice: AchievementManager.__init__() missing 1 required positional argument: 'statistics_manager'
+2024-12-29 01:29:29,079 - src.ui.transcription - ERROR - Error initializing managers: BackupManager.__init__() missing 1 required positional argument: 'config_manager'
+2024-12-29 01:29:29,083 - src.ui.dashboard - ERROR - Error continuing practice: BackupManager.__init__() missing 1 required positional argument: 'config_manager'
+2024-12-29 01:30:31,554 - src.ui.transcription - INFO - Progress loaded: segment 15
+2024-12-29 01:31:04,015 - src.ui.transcription - INFO - Progress loaded: segment 15
+2024-12-29 01:31:07,202 - src.ui.transcription - INFO - Progress saved: segment 16
+2024-12-29 01:31:18,211 - src.ui.transcription - INFO - Progress saved: segment 17
+2024-12-29 01:31:24,802 - src.ui.transcription - INFO - Progress saved: segment 18
+2024-12-29 01:31:29,536 - src.ui.transcription - INFO - Progress saved: segment 19
+2024-12-29 01:31:32,841 - src.ui.transcription - INFO - Progress saved: segment 18
+2024-12-29 01:31:39,757 - src.ui.transcription - INFO - Progress saved: segment 17
+2024-12-29 01:31:43,687 - src.ui.transcription - INFO - Progress saved: segment 16
+2024-12-29 01:32:49,963 - src.ui.transcription - INFO - Progress loaded: segment 16
+2024-12-29 01:32:49,963 - core.note_manager - INFO - Video file: C:/Users/quang/Downloads/Video/output file.mp4
+2024-12-29 01:32:49,964 - core.note_manager - INFO - Video hash: 3860518249396046613
+2024-12-29 01:32:49,964 - core.note_manager - INFO - Loading notes from file: data\notes\3860518249396046613.json
+2024-12-29 01:32:49,965 - core.note_manager - INFO - No existing notes file found, returning empty notes
+2024-12-29 01:32:49,965 - src.ui.transcription - INFO - Loaded notes for video: C:/Users/quang/Downloads/Video/output file.mp4
+2024-12-29 01:32:49,966 - src.ui.transcription - INFO - Notes content: {'words': [], 'segments': []}
+2024-12-29 01:33:02,090 - core.note_manager - INFO - Video file: C:/Users/quang/Downloads/Video/output file.mp4
+2024-12-29 01:33:02,091 - core.note_manager - INFO - Video hash: 3860518249396046613
+2024-12-29 01:33:02,093 - core.note_manager - INFO - Loading notes from file: data\notes\3860518249396046613.json
+2024-12-29 01:33:02,093 - core.note_manager - INFO - No existing notes file found, returning empty notes
+2024-12-29 01:33:02,094 - src.ui.transcription - INFO - Loaded notes for video: C:/Users/quang/Downloads/Video/output file.mp4
+2024-12-29 01:33:02,095 - src.ui.transcription - INFO - Notes content: {'words': [], 'segments': []}
+2024-12-29 01:33:02,099 - core.note_manager - INFO - Video file: C:/Users/quang/Downloads/Video/output file.mp4
+2024-12-29 01:33:02,099 - core.note_manager - INFO - Video hash: 3860518249396046613
+2024-12-29 01:33:02,100 - core.note_manager - INFO - Loading notes from file: data\notes\3860518249396046613.json
+2024-12-29 01:33:02,101 - core.note_manager - INFO - No existing notes file found, returning empty notes
+2024-12-29 01:33:06,576 - core.note_manager - INFO - Video file: C:/Users/quang/Downloads/Video/output file.mp4
+2024-12-29 01:33:06,577 - core.note_manager - INFO - Video hash: 3860518249396046613
+2024-12-29 01:33:06,579 - core.note_manager - INFO - Loading notes from file: data\notes\3860518249396046613.json
+2024-12-29 01:33:06,580 - core.note_manager - INFO - No existing notes file found, returning empty notes
+2024-12-29 01:33:06,581 - core.note_manager - INFO - Video file: C:/Users/quang/Downloads/Video/output file.mp4
+2024-12-29 01:33:06,581 - core.note_manager - INFO - Video hash: 3860518249396046613
+2024-12-29 01:33:10,112 - core.note_manager - INFO - Video file: C:/Users/quang/Downloads/Video/output file.mp4
+2024-12-29 01:33:10,112 - core.note_manager - INFO - Video hash: 3860518249396046613
+2024-12-29 01:33:10,113 - core.note_manager - INFO - Loading notes from file: data\notes\3860518249396046613.json
+2024-12-29 01:33:10,130 - core.note_manager - INFO - Loaded notes content: {'words': [], 'segments': ['Do you realize how traumatizing that is?']}
+2024-12-29 01:33:10,130 - src.ui.transcription - INFO - Loaded notes for video: C:/Users/quang/Downloads/Video/output file.mp4
+2024-12-29 01:33:10,131 - src.ui.transcription - INFO - Notes content: {'words': [], 'segments': ['Do you realize how traumatizing that is?']}
+2024-12-29 01:33:10,134 - core.note_manager - INFO - Video file: C:/Users/quang/Downloads/Video/output file.mp4
+2024-12-29 01:33:10,134 - core.note_manager - INFO - Video hash: 3860518249396046613
+2024-12-29 01:33:10,135 - core.note_manager - INFO - Loading notes from file: data\notes\3860518249396046613.json
+2024-12-29 01:33:10,136 - core.note_manager - INFO - Loaded notes content: {'words': [], 'segments': ['Do you realize how traumatizing that is?']}
+2024-12-29 01:33:17,916 - src.ui.transcription - INFO - Progress saved: segment 17
+2024-12-29 01:33:24,909 - core.note_manager - INFO - Video file: C:/Users/quang/Downloads/Video/output file.mp4
+2024-12-29 01:33:24,910 - core.note_manager - INFO - Video hash: 3860518249396046613
+2024-12-29 01:33:24,910 - core.note_manager - INFO - Loading notes from file: data\notes\3860518249396046613.json
+2024-12-29 01:33:24,911 - core.note_manager - INFO - Loaded notes content: {'words': [], 'segments': ['Do you realize how traumatizing that is?']}
+2024-12-29 01:33:24,912 - core.note_manager - INFO - Video file: C:/Users/quang/Downloads/Video/output file.mp4
+2024-12-29 01:33:24,913 - core.note_manager - INFO - Video hash: 3860518249396046613
+2024-12-29 01:33:31,376 - core.note_manager - INFO - Video file: C:/Users/quang/Downloads/Video/output file.mp4
+2024-12-29 01:33:31,377 - core.note_manager - INFO - Video hash: 3860518249396046613
+2024-12-29 01:33:31,377 - core.note_manager - INFO - Loading notes from file: data\notes\3860518249396046613.json
+2024-12-29 01:33:31,390 - core.note_manager - INFO - Loaded notes content: {'words': ['careful'], 'segments': ['Do you realize how traumatizing that is?']}
+2024-12-29 01:33:31,391 - src.ui.transcription - INFO - Loaded notes for video: C:/Users/quang/Downloads/Video/output file.mp4
+2024-12-29 01:33:31,392 - src.ui.transcription - INFO - Notes content: {'words': ['careful'], 'segments': ['Do you realize how traumatizing that is?']}
+2024-12-29 01:33:31,393 - core.note_manager - INFO - Video file: C:/Users/quang/Downloads/Video/output file.mp4
+2024-12-29 01:33:31,394 - core.note_manager - INFO - Video hash: 3860518249396046613
+2024-12-29 01:33:31,395 - core.note_manager - INFO - Loading notes from file: data\notes\3860518249396046613.json
+2024-12-29 01:33:31,395 - core.note_manager - INFO - Loaded notes content: {'words': ['careful'], 'segments': ['Do you realize how traumatizing that is?']}
+2024-12-29 01:33:42,955 - core.note_manager - INFO - Video file: C:/Users/quang/Downloads/Video/output file.mp4
+2024-12-29 01:33:42,955 - core.note_manager - INFO - Video hash: 3860518249396046613
+2024-12-29 01:33:42,956 - core.note_manager - INFO - Loading notes from file: data\notes\3860518249396046613.json
+2024-12-29 01:33:42,956 - core.note_manager - INFO - Loaded notes content: {'words': ['careful'], 'segments': ['Do you realize how traumatizing that is?']}
+2024-12-29 01:33:42,957 - core.note_manager - INFO - Video file: C:/Users/quang/Downloads/Video/output file.mp4
+2024-12-29 01:33:42,957 - core.note_manager - INFO - Video hash: 3860518249396046613
+2024-12-29 01:33:45,316 - core.note_manager - INFO - Video file: C:/Users/quang/Downloads/Video/output file.mp4
+2024-12-29 01:33:45,317 - core.note_manager - INFO - Video hash: 3860518249396046613
+2024-12-29 01:33:45,318 - core.note_manager - INFO - Loading notes from file: data\notes\3860518249396046613.json
+2024-12-29 01:33:45,340 - core.note_manager - INFO - Loaded notes content: {'words': [], 'segments': []}
+2024-12-29 01:37:41,251 - src.ui.transcription - INFO - Progress loaded: segment 17
+2024-12-29 01:37:41,268 - core.note_manager - INFO - Video file: C:/Users/quang/Downloads/Video/output file.mp4
+2024-12-29 01:37:41,269 - core.note_manager - INFO - Video hash: -5789993505361873871
+2024-12-29 01:37:41,269 - core.note_manager - INFO - Loading notes from file: data\notes\-5789993505361873871.json
+2024-12-29 01:37:41,270 - core.note_manager - INFO - No existing notes file found, returning empty notes
+2024-12-29 01:37:41,271 - src.ui.transcription - INFO - Loaded notes for video: C:/Users/quang/Downloads/Video/output file.mp4
+2024-12-29 01:37:41,271 - src.ui.transcription - INFO - Notes content: {'words': [], 'segments': []}
+2024-12-29 01:37:53,000 - src.ui.transcription - INFO - Progress saved: segment 18
+2024-12-29 01:38:04,082 - src.ui.transcription - INFO - Progress saved: segment 19
+2024-12-29 01:39:23,216 - src.ui.transcription - INFO - Progress loaded: segment 19
+2024-12-29 01:40:04,678 - src.ui.transcription - INFO - Progress loaded: segment 19
+2024-12-29 01:40:06,148 - core.note_manager - INFO - Video file: C:/Users/quang/Downloads/Video/output file.mp4
+2024-12-29 01:40:06,148 - core.note_manager - INFO - Video hash: 6041922593533848932
+2024-12-29 01:40:06,149 - core.note_manager - INFO - Loading notes from file: data\notes\6041922593533848932.json
+2024-12-29 01:40:06,150 - core.note_manager - INFO - No existing notes file found, returning empty notes
+2024-12-29 01:40:37,360 - src.ui.transcription - INFO - Progress saved: segment 18
+2024-12-29 01:40:43,018 - src.ui.transcription - INFO - Progress saved: segment 19
+2024-12-29 01:40:46,592 - src.ui.transcription - INFO - Progress saved: segment 20
