@@ -156,3 +156,22 @@
 2024-12-29 01:40:37,360 - src.ui.transcription - INFO - Progress saved: segment 18
 2024-12-29 01:40:43,018 - src.ui.transcription - INFO - Progress saved: segment 19
 2024-12-29 01:40:46,592 - src.ui.transcription - INFO - Progress saved: segment 20
+2024-12-29 09:13:24,381 - src.ui.transcription - INFO - Progress loaded: segment 27
+2024-12-29 09:15:33,930 - src.ui.transcription - ERROR - Invalid video length
+2024-12-29 09:15:33,930 - src.ui.transcription - ERROR - Invalid video length
+2024-12-29 09:15:33,931 - src.ui.transcription - INFO - Progress loaded: segment 27
+2024-12-29 09:15:37,808 - src.ui.transcription - ERROR - Invalid video length
+2024-12-29 09:15:39,304 - src.ui.transcription - ERROR - Invalid video length
+2024-12-29 09:15:39,555 - src.ui.transcription - ERROR - Invalid video length
+2024-12-29 09:15:39,771 - src.ui.transcription - ERROR - Invalid video length
+2024-12-29 09:15:39,970 - src.ui.transcription - ERROR - Invalid video length
+2024-12-29 09:16:59,641 - src.ui.transcription - INFO - Progress loaded: segment 27
+2024-12-29 09:17:39,860 - src.ui.transcription - INFO - Progress saved: segment 28
+2024-12-29 09:17:52,663 - src.ui.transcription - INFO - Progress saved: segment 29
+2024-12-29 09:18:11,365 - src.ui.transcription - INFO - Progress saved: segment 30
+2024-12-29 09:18:56,767 - src.ui.transcription - INFO - Progress saved: segment 31
+2024-12-29 09:19:09,081 - src.ui.transcription - INFO - Progress saved: segment 32
+2024-12-29 09:19:12,446 - src.ui.transcription - INFO - Progress saved: segment 33
+2024-12-29 09:19:17,845 - src.ui.transcription - INFO - Progress saved: segment 34
+2024-12-29 09:19:25,909 - src.ui.transcription - INFO - Progress loaded: segment 34
+2024-12-29 09:20:11,064 - src.ui.transcription - INFO - Progress saved: segment 35
