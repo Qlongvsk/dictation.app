@@ -245,7 +245,7 @@ class FloatingTextEdit(CustomTextEdit):
         # Cho phép trong suốt
         self.setAttribute(Qt.WA_TranslucentBackground)
         
-        # Style v���i text được căn giữa hoàn toàn
+        # Style với text được căn giữa hoàn toàn
         self.setStyleSheet("""
             FloatingTextEdit {
                 background-color: rgba(43, 43, 43, 0.8);
@@ -333,7 +333,10 @@ class TranscriptionApp(QWidget):
         # Khởi tạo các thuộc tính
         self.video_file = video_file
         self.subtitle_file = subtitle_file
+        self.video_file = video_file
+        self.subtitle_file = subtitle_file
         self.segments = None
+        self.current_segment_index = 1
         self.current_segment_index = 1
         self.timer = QTimer()
         self.segment_timer = QTimer()
@@ -595,6 +598,9 @@ class TranscriptionApp(QWidget):
             if not self.video_file:
                 return False
             
+            if not self.video_file:
+                return False
+            
             # Khởi tạo VLC player
             self.instance = vlc.Instance()
             self.player = self.instance.media_player_new()
@@ -611,15 +617,20 @@ class TranscriptionApp(QWidget):
             elif sys.platform == "darwin":
                 self.player.set_nsobject(int(self.video_frame.winId()))
             
+            
             return True
             
         except Exception as e:
             logger.error(f"Error loading video: {str(e)}")
             return False
             
+            
     def load_subtitles(self):
         """Load và xử lý file phụ đề"""
         try:
+            if not self.subtitle_file:
+                return False
+                
             if not self.subtitle_file:
                 return False
                 
@@ -631,6 +642,9 @@ class TranscriptionApp(QWidget):
             
             # Đặt vị trí video tại segment đầu tiên
             if self.segments:
+                self.current_segment_index = 1
+                self.play_current_segment()
+                
                 self.current_segment_index = 1
                 self.play_current_segment()
                 
@@ -705,6 +719,7 @@ class TranscriptionApp(QWidget):
         return ' '.join(text.lower().split())
 
     def highlight_text(self, current_text, correct_text, current_word_index=0):
+        """Highlight text khi g"""
         """Highlight text khi g"""
         try:
             if not self.text_edit:
