@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2024-12-28 06:56:48,339 - src.ui.dashboard - ERROR - Error showing statistics: 'Dashboard' object has no attribute 'get_current_stats'
 2024-12-28 06:58:51,307 - src.ui.dashboard - ERROR - Error showing statistics: 'Dashboard' object has no attribute 'get_current_stats'
 2024-12-28 07:01:18,826 - src.ui.statistics_dialog - ERROR - Error updating statistics display: 'StatisticsDialog' object has no attribute 'total_time_label'
@@ -175,3 +176,15 @@
 2024-12-29 09:19:17,845 - src.ui.transcription - INFO - Progress saved: segment 34
 2024-12-29 09:19:25,909 - src.ui.transcription - INFO - Progress loaded: segment 34
 2024-12-29 09:20:11,064 - src.ui.transcription - INFO - Progress saved: segment 35
+=======
+2024-12-29 08:51:42,372 - src.ui.transcription - INFO - Progress loaded: segment 20
+2024-12-29 08:54:32,124 - src.ui.transcription - INFO - Progress saved: segment 21
+2024-12-29 08:54:47,738 - src.ui.transcription - INFO - Progress saved: segment 22
+2024-12-29 08:58:00,714 - src.ui.transcription - INFO - Progress loaded: segment 22
+2024-12-29 08:58:24,568 - src.ui.transcription - INFO - Progress saved: segment 23
+2024-12-29 08:59:09,815 - src.ui.transcription - INFO - Progress saved: segment 24
+2024-12-29 09:00:22,329 - src.ui.transcription - INFO - Progress saved: segment 25
+2024-12-29 09:03:26,909 - src.ui.transcription - INFO - Progress saved: segment 26
+2024-12-29 09:04:13,956 - src.ui.transcription - INFO - Progress saved: segment 27
+2024-12-29 09:05:11,646 - src.ui.transcription - INFO - Progress loaded: segment 27
+>>>>>>> 87db9f7757e38e19ee98f9d28a4b31e15c495986
