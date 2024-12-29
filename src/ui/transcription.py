@@ -333,7 +333,10 @@ class TranscriptionApp(QWidget):
         # Khởi tạo các thuộc tính
         self.video_file = video_file
         self.subtitle_file = subtitle_file
+        self.video_file = video_file
+        self.subtitle_file = subtitle_file
         self.segments = None
+        self.current_segment_index = 1
         self.current_segment_index = 1
         self.timer = QTimer()
         self.segment_timer = QTimer()
@@ -595,6 +598,9 @@ class TranscriptionApp(QWidget):
             if not self.video_file:
                 return False
             
+            if not self.video_file:
+                return False
+            
             # Khởi tạo VLC player
             self.instance = vlc.Instance()
             self.player = self.instance.media_player_new()
@@ -611,15 +617,20 @@ class TranscriptionApp(QWidget):
             elif sys.platform == "darwin":
                 self.player.set_nsobject(int(self.video_frame.winId()))
             
+            
             return True
             
         except Exception as e:
             logger.error(f"Error loading video: {str(e)}")
             return False
             
+            
     def load_subtitles(self):
         """Load và xử lý file phụ đề"""
         try:
+            if not self.subtitle_file:
+                return False
+                
             if not self.subtitle_file:
                 return False
                 
@@ -631,6 +642,9 @@ class TranscriptionApp(QWidget):
             
             # Đặt vị trí video tại segment đầu tiên
             if self.segments:
+                self.current_segment_index = 1
+                self.play_current_segment()
+                
                 self.current_segment_index = 1
                 self.play_current_segment()
                 
@@ -705,6 +719,7 @@ class TranscriptionApp(QWidget):
         return ' '.join(text.lower().split())
 
     def highlight_text(self, current_text, correct_text, current_word_index=0):
+        """Highlight text khi g"""
         """Highlight text khi g"""
         try:
             if not self.text_edit:
@@ -840,15 +855,17 @@ class TranscriptionApp(QWidget):
             start_ms = self.video_processor.time_to_milliseconds(start_time)
             end_ms = self.video_processor.time_to_milliseconds(end_time)
             
-            # Thêm buffer time
-            buffer_ms = 400  # 0.4 giây
-            end_ms += buffer_ms
+            # Thêm 500ms vào thời gian kết thúc
+            end_ms += 400 # Thêm 0.5 giây
+            duration = end_ms - start_ms
             
-            # Đặt vị trí và phát video
+            # Đặt vị trí video chính xác đến millisecond
             self.player.set_time(int(start_ms))
+            self.player.play()
             
-            # Đợi một chút để video load
-            QTimer.singleShot(100, lambda: self._play_and_set_timer(start_ms, end_ms))
+            # Dừng video khi hết segment (đã bao gồm 500ms phụ trội)
+            self.segment_timer.stop()  # Dừng timer cũ nếu có
+            self.segment_timer.singleShot(duration, self.player.pause)
             
             # Cập nhật word count
             total_words = len(current_segment["text"].split())
@@ -856,22 +873,6 @@ class TranscriptionApp(QWidget):
             
         except Exception as e:
             logger.error(f"Error playing segment: {str(e)}")
-
-    def _play_and_set_timer(self, start_ms, end_ms):
-        """Helper method để phát video và set timer sau khi video đã load"""
-        try:
-            # Phát video
-            self.player.play()
-            
-            # Tính duration
-            duration = end_ms - start_ms
-            
-            # Thiết lập timer để dừng video
-            self.segment_timer.stop()
-            self.segment_timer.singleShot(int(duration), self.player.pause)
-            
-        except Exception as e:
-            logger.error(f"Error in play and set timer: {str(e)}")
 
     def check_segment_end(self):
         """Kiểm tra và dừng video khi đến cuối segment"""
