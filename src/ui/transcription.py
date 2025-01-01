@@ -551,7 +551,7 @@ class TranscriptionApp(QWidget):
             # Chọn file video
             video_file, _ = QFileDialog.getOpenFileName(
                 self, "Open Video File", "", 
-                "Video Files (*.mp4 *.avi *.mkv *.ts)"
+                "Video Files (*.mp4 *.mp3 *.wav *.avi *.mkv *.ts)"
             )
             if not video_file:
                 return False
