@@ -58,6 +58,11 @@ class CustomTextEdit(QTextEdit):
         return ' '.join(text.lower().split())
 
     def keyPressEvent(self, event):
+        # Xử lý phím Shift để hiện từ tiếp theo
+        if event.key() == Qt.Key_Shift:
+            self.reveal_next_word()
+            return
+
         # Xử lý phím Ctrl để replay
         if event.key() == Qt.Key_Control:
             if self.parent_app:
@@ -94,6 +99,35 @@ class CustomTextEdit(QTextEdit):
                     return
 
         super().keyPressEvent(event)
+
+    def reveal_next_word(self):
+        """Hiện từ tiếp theo đúng"""
+        try:
+            current_text = self.toPlainText().strip()
+            target_text = self.parent_app.segments[self.parent_app.current_segment_index - 1]["text"]
+            
+            current_words = current_text.split()
+            target_words = target_text.split()
+            
+            # Tìm từ tiếp theo chưa đúng
+            for i, (current_word, target_word) in enumerate(zip(current_words, target_words)):
+                if self.normalize_text(current_word) != self.normalize_text(target_word):
+                    # Thay thế từ hiện tại bằng từ đúng
+                    current_words[i] = target_word
+                    break
+            else:
+                # Nếu tất cả các từ hiện tại đều đúng, thêm từ tiếp theo
+                if len(current_words) < len(target_words):
+                    current_words.append(target_words[len(current_words)])
+            
+            # Cập nhật text
+            self.setText(' '.join(current_words))
+            cursor = self.textCursor()
+            cursor.movePosition(QTextCursor.End)
+            self.setTextCursor(cursor)
+            
+        except Exception as e:
+            logger.error(f"Error revealing next word: {str(e)}")
 
     def on_text_changed(self):
         if self.is_updating:

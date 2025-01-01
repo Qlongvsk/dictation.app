@@ -197,3 +197,13 @@
 2025-01-01 12:49:43,251 - src.ui.transcription - INFO - Progress saved: segment 8
 2025-01-01 12:49:49,378 - src.ui.transcription - INFO - Progress saved: segment 9
 2025-01-01 12:49:54,564 - src.ui.transcription - INFO - Progress saved: segment 10
+2025-01-01 12:56:40,503 - src.ui.transcription - INFO - Progress loaded: segment 10
+2025-01-01 12:58:15,468 - src.ui.transcription - INFO - Progress saved: segment 11
+2025-01-01 12:58:23,998 - src.ui.transcription - INFO - Progress saved: segment 12
+2025-01-01 12:58:29,897 - src.ui.transcription - INFO - Progress saved: segment 11
+2025-01-01 12:58:34,503 - src.ui.transcription - INFO - Progress saved: segment 12
+2025-01-01 12:59:57,517 - src.ui.transcription - INFO - Progress saved: segment 13
+2025-01-01 13:00:23,330 - src.ui.transcription - INFO - Progress saved: segment 14
+2025-01-01 13:00:26,245 - src.ui.transcription - INFO - Progress saved: segment 15
+2025-01-01 13:00:51,684 - src.ui.transcription - INFO - Progress saved: segment 16
+2025-01-01 13:01:03,614 - src.ui.transcription - INFO - Progress saved: segment 17
